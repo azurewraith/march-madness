@@ -1,0 +1,23 @@
+      <div id="match1" class="match m<%= game_counter+1 %>">
+          <p class="slot slot1 c1%>" title="" id="slot1">
+      <% #if ((game.swap? and game.id < 300) or (game.swap? and game_counter!=0 and game.id >=300 )) and game.home_team != nil and game.visitor_team != nil %>
+        <% round = (game.id / 100) - 1 %>
+        <% if (game.swap? or ((round == 2 and game_counter != 0) or round > 2)) %>
+                <% temp = game.home_team %>
+                <% temp_points = game.home_points %>
+                <% game.home_team = game.visitor_team %>
+                <% game.home_points = game.visitor_points %>
+                <% game.visitor_team = temp %>
+        <% game.visitor_points = temp_points %>
+                <% end %>
+                <% if game.home_team == nil%>
+                        <span class="seed"></span><em class="time"></em>
+                <% elsif game.home_points == nil%>
+                        <span class="seed"><%= game.home_team.seed %></span><span style="background-color: <%= game.home_team.user.color %>"><%= game.home_team.abbrev %></span> <em class="time"><%= game.time.in_time_zone.day.ordinalize %></em>
+                <% elsif game.state.name == 'in_progress'%>
+                        <span class="inprogress"><span class="seed"><%= game.home_team.seed %></span> <span style="background-color: <%= game.home_team.user.color %>"><%= game.home_team.abbrev %></span> <em class="score"><%= game.home_points %></em></span>
+                <% else %>
+                        <% wl = (game.home_points > game.visitor_points) ? "strong" : "strike"%>
+                <<%= wl %>><span class="seed"><%= game.home_team.seed %></span> <span style="background-color: <%= game.home_team.user.color %>"><%= game.home_team.abbrev %></span> <em class="score"><%= game.home_points %></em></<%= wl %>>
+                <% end %>
+          </p>
