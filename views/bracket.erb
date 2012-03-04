@@ -1,13 +1,13 @@
 <center>
-        <table>
-        <% @users.each do |user| %>
-                <tr>
-                        <td style = "background-color:<%= user.color %>"><%= user.name %></td>
-                        <td align="center"><%= user.points %></td>
-                </tr>
-        <% end%>
-        </table>
-        <h5>March Madness Tweet: <%= @blurb %></h5>
+	<table>
+	<% @users.each do |user| %>
+		<tr>
+			<td style = "background-color:<%= user.color %>"><%= user.name %></td>
+			<td align="center"><%= user.points %></td>
+		</tr>
+	<% end%>
+	</table>
+	<h5>March Madness Tweet: <%= @blurb %></h5>
 </center>
     <div id="table">
       <!-- Table Dates -->
@@ -84,4 +84,141 @@
         </tr>
       </table>
     </div>
-<!-- Bracket -->
+    <!-- Bracket -->
+    <div id="bracket">
+      <div id="round1" class="round">
+        <h3>
+          Round One (2010 NCAA Men's Basketball Tournament)
+        </h3><!-- start region1 -->
+        <div class="region region1">
+          <h4 class="region1 first_region">
+            <%= @regions[1].name %>
+          </h4>
+		  <%= partial(:game, :collection => @e_round_1) %>
+        </div><!-- /.region1 -->
+        <!-- start region2 -->
+        <div class="region region2">
+          <h4 class="region2 first_region">
+            <%= @regions[2].name %>
+          </h4>
+          <%= partial(:game, :collection => @w_round_1) %>
+        </div><!-- /.region2 -->
+        <!-- start region3 -->
+        <div class="region region3">
+          <h4 class="region3 first_region">
+            <%= @regions[3].name %>
+          </h4>
+          <%= partial(:game, :collection => @sw_round_1) %>
+        </div><!-- /.region3 -->
+        <!-- start region4 -->
+        <div class="region region4">
+          <h4 class="region4 first_region">
+            <%= @regions[4].name %>
+          </h4>
+          <%= partial(:game, :collection => @se_round_1) %>
+        </div><!-- /.region4 -->
+      </div><!-- /#round1 -->
+      <div id="round2" class="round">
+        <h3>
+          Round Two (2010 NCAA Men's Basketball Tournament)
+        </h3>
+        <div class="region region1">
+          <h4 class="region1">
+            <%= @regions[1].name %>
+          </h4>
+          <%= partial(:game, :collection => @e_round_2) %>
+        </div><!-- /.region1 -->
+        <div class="region region2">
+          <h4 class="region2">
+            <%= @regions[2].name %>
+          </h4>
+          <%= partial(:game, :collection => @w_round_2) %>
+        </div>
+        <div class="region region3">
+          <h4 class="region3">
+            <%= @regions[3].name %>
+          </h4>
+          <%= partial(:game, :collection => @sw_round_2) %>
+        </div><!--/.region3-->
+        <div class="region region4">
+          <h4 class="region4">
+            <%= @regions[4].name %>
+          </h4>
+          <%= partial(:game, :collection => @se_round_2) %>
+        </div><!--/.region4-->
+      </div>
+      <div id="round3" class="round">
+        <h3>
+          Round Three (2010 NCAA Men's Basketball Tournament)
+        </h3>
+        <div class="region region1">
+          <h4 class="region1">
+            <%= @regions[1].name %>
+          </h4>
+          <%= partial(:game, :collection => @e_round_3) %>
+        </div><!-- /.region1 -->
+        <div class="region region2">
+          <h4 class="region2">
+            <%= @regions[2].name %>
+          </h4>
+          <%= partial(:game, :collection => @w_round_3) %>
+        </div>
+        <div class="region region3">
+          <h4 class="region3">
+            <%= @regions[3].name %>
+          </h4>
+          <%= partial(:game, :collection => @sw_round_3) %>
+        </div><!-- /.region3 -->
+        <div class="region region4">
+          <h4 class="region4">
+            <%= @regions[4].name %>
+          </h4>
+          <%= partial(:game, :collection => @se_round_3) %>
+        </div><!-- /.region4 -->
+      </div>
+      <div id="round4" class="round">
+        <h3>
+          Round Four (2010 NCAA Men's Basketball Tournament)
+        </h3>
+        <div class="region region1">
+          <h4 class="region1">
+            <%= @regions[1].name %>
+          </h4>
+          <%= partial(:game, :collection => @e_round_4) %>
+        </div><!-- /.region1 -->
+        <div class="region region2">
+          <h4 class="region2">
+            <%= @regions[2].name %>
+          </h4>
+          <%= partial(:game, :collection => @w_round_4) %>
+        </div><!-- /.region2 -->
+        <div class="region region3">
+          <h4 class="region3">
+            <%= @regions[3].name %>
+          </h4>
+          <%= partial(:game, :collection => @sw_round_4) %>
+        </div><!--/.region3-->
+        <div class="region region4">
+          <h4 class="region4">
+            <%= @regions[4].name %>
+          </h4>
+          <%= partial(:game, :collection => @se_round_4) %>
+        </div><!--/#region4-->
+      </div>
+      <div id="round5" class="round">
+        <h3>
+          Round Five (2010 NCAA Men's Basketball Tournament)
+        </h3>
+        <div class="region">
+          <%= partial(:game, :collection => @final_four) %>
+        </div>
+      </div>
+      <div id="round6" class="round">
+        <h3>
+          Round Six (2010 NCAA Men's Basketball Tournament)
+        </h3>
+        <div class="region">
+          <%= partial(:game, :collection => @final) %>
+        </div>
+      </div>
+    </div>

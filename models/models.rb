@@ -1,34 +1,34 @@
-class Game < ActiveRecord::Base
-  belongs_to :region
-  belongs_to :state
-  belongs_to :home_team, :class_name => 'Team', :foreign_key => 'home_team_id'
-  belongs_to :visitor_team, :class_name => 'Team', :foreign_key => 'visitor_team_id'
+class Game < Sequel::Model
+  many_to_one :region
+  many_to_one :state
+  many_to_one :home_team, :class_name => 'Team', :foreign_key => 'home_team_id'
+  many_to_one :visitor_team, :class_name => 'Team', :foreign_key => 'visitor_team_id'
 end
 
-class Period < ActiveRecord::Base
+class Period < Sequel::Model
 end
 
-class Pick < ActiveRecord::Base
+class Pick < Sequel::Model
 end
 
-class Region < ActiveRecord::Base
-  belongs_to :team
-  belongs_to :game
+class Region < Sequel::Model
+  many_to_one :team
+  many_to_one :game
 end
 
-class State < ActiveRecord::Base
-  has_many :games
+class State < Sequel::Model
+  one_to_many :games
 end
 
-class Team < ActiveRecord::Base
-  has_one :region
-  belongs_to :user
+class Team < Sequel::Model
+  one_to_many :region
+  many_to_one :user
 end
 
-class User < ActiveRecord::Base
-  has_many :teams
+class User < Sequel::Model
+  many_to_one :teams
 end
 
-class Winner < ActiveRecord::Base
-  belongs_to :user
+class Winner < Sequel::Model
+  many_to_one :user
 end
