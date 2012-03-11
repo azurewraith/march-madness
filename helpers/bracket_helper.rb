@@ -93,7 +93,7 @@ class BracketData
     end
     
     def BracketData.add_winner_if_needed(g)
-      w = Winner.where(:game_id => g.id)
+      w = Winner.where(:game_id => g.id).first
       puts w
       if (w.nil? and g.home_points != nil and g.visitor_points != nil and g.state.name == 'complete')
           winning_team_id = g.home_points > g.visitor_points ? g.home_team_id : g.visitor_team_id

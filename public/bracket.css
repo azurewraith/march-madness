@@ -1,3 +1,7 @@
+body.bracket {
+	background-color: #eeeeee;
+}
+
 body.bracket #content-wrapper {
   width: 970px;
   padding-top: 10px;
@@ -32,6 +36,7 @@ table.gridtable td {
   border-color: #ffffff;
   background-color: #ffffff;
   text-align: center;
+  background-color: #eeeeee;
 }
 table.gridtable td.title {
   background: #cccccc;
@@ -39,6 +44,7 @@ table.gridtable td.title {
 }
 #bracket {
   margin-top: 15px;
+  margin-left: 147px;
   height: 1000px;
   position: relative;
 }

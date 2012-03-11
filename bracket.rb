@@ -243,4 +243,10 @@ end
 
 helpers do
   include RenderHelpers
+  
+  def icon_for_team(team_abbrev)
+    abbrev = team_abbrev.downcase
+    letter = abbrev[0,1]
+    "&nbsp;<img width=17px src='http://i.turner.ncaa.com/dr/ncaa/ncaa/release/sites/default/files/images/logos/schools/#{letter}/#{abbrev}.17.png'>&nbsp;"
+  end
 end
