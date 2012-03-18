@@ -1,13 +1,18 @@
 <center>
 	<table>
-	<% @users.each do |user| %>
-		<tr>
+	<tr>
+	<% @users.each_with_index do |user, i| %>
+	  <% if i % 3 == 0 %>
+		  <tr>
+		<% end %>
 			<td style = "background-color:<%= user.color %>"><%= user.name %></td>
 			<td align="center"><%= user.points %></td>
-		</tr>
-	<% end%>
+		<% if i % 3 == 0 %>
+		<!--</tr>-->
+		<% end %>
+	<% end %>
 	</table>
-	<h5>March Madness Tweet: <%= @blurb %></h5>
+	<!--<h5>March Madness Tweet: <%= @blurb %></h5>-->
 </center>
     <div align=center id="table">
       <!-- Table Dates -->
@@ -222,3 +227,4 @@
         </div>
       </div>
     </div>
+    <% #binding.pry %>
