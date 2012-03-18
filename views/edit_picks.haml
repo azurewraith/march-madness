@@ -1,0 +1,18 @@
+%form{:action => '/picks/edit', :method => 'POST' }
+  %table
+    %tr
+      %th id
+      %th user_id
+      %th team_id
+      %th seed
+      = @picks.each do |p|
+        %tr
+          %td= p.id
+          %td
+            %select{:name => p.id}
+              - @users.each do |user|
+                %option{:value => "#{user.id}", :selected => (p.user_id == user.id)}= user.name
+          %td= p.team.school
+          %td= p.team.seed
+  %input{:type => 'text', :name => 'secret'}
+  %input{:type => 'submit'}
