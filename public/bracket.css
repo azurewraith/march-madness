@@ -44,7 +44,9 @@ table.gridtable td.title {
 }
 #bracket {
   margin-top: 15px;
-  margin-left: 147px;
+  margin-left: auto;
+  margin-right: auto;
+  width : 950px;
   height: 1000px;
   position: relative;
 }
@@ -56,7 +58,7 @@ table.gridtable td.title {
 #bracket .round strong { color: #000000; }
 #bracket .round strong span.seed { color: #000000; }
 #bracket .round strong span.score { color: #000000; }
-#bracket .inprogress { color: #61BB00; font-weight:bold; }
+#bracket .inprogress { color: #FF1100; font-weight:bold; }
 #bracket #round2 {
   left: 115px;
   width: 720px;
@@ -220,9 +222,10 @@ table.gridtable td.title {
 }
 #bracket .match .time {
   position: absolute;
-  right: 4px;
+  right: 2px;
+  top: 7px;
   font-style: normal;
-  font-size:10px;
+  font-size:8px;
 }
 #bracket .match .seed {
   color: #777777;

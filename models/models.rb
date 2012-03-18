@@ -9,6 +9,8 @@ class Period < Sequel::Model
 end
 
 class Pick < Sequel::Model
+  many_to_one :team
+  many_to_one :user
 end
 
 class Region < Sequel::Model
@@ -22,11 +24,12 @@ end
 
 class Team < Sequel::Model
   one_to_many :region
-  many_to_one :user
+  #many_to_one :user
 end
 
 class User < Sequel::Model
-  many_to_one :teams
+  #many_to_one :teams
+  many_to_one :picks
 end
 
 class Winner < Sequel::Model
