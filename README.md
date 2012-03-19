@@ -4,8 +4,8 @@ A Sinatra based data-driven live bracket viewer.
 
 ## Installation
 
-bundle install
-rackup
+* bundle install
+* rackup
 
 ## Caveats
 
