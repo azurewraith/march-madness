@@ -3,16 +3,6 @@
 <head>
   <title>NCAA Bracket</title>
   <link rel=StyleSheet HREF="bracket.css" TYPE="text/css" MEDIA=screen>
-  <script type="text/javascript">
-	Event.observe(window, 'load', function(e) {
-	var now = new Date();
-	var gmtoffset = now.getTimezoneOffset();
-	// use ajax to set the time zone here.
-	var set_time = new Ajax.Request('/gmtoffset/?gmtoffset='+gmtoffset, {
-	onSuccess: function(transport) {}
-	});
-	});
-  </script>
 </head>
 <body class="bracket standings light-blue" id="">
 <%= yield %>

@@ -1,4 +1,6 @@
 require 'rubygems'
+require "bundler/setup"
+
 require 'sqlite3'
 require 'sinatra/sequel'
 require 'sinatra'
@@ -9,11 +11,6 @@ require 'helpers/bracket_helper.rb'
 require 'helpers/render_helper.rb'
 require 'models/models.rb'
 require 'models/migrations.rb'
-
-#before '/' do
-#  init_time_zone
-#end
-#before_filter :init_time_zone
   
 get '/' do
   BracketData.update_bracket_data
@@ -82,8 +79,8 @@ helpers do
   
   def icon_for_team(team_abbrev)
     abbrev = team_abbrev.downcase
-    letter = abbrev[0,1]
-    "&nbsp;<img width=17px src='http://i.turner.ncaa.com/dr/ncaa/ncaa/release/sites/default/files/images/logos/schools/#{letter}/#{abbrev}.17.png'>&nbsp;"
+    letter= abbrev[0,1]
+    "<img class='image' src='http://i.turner.ncaa.com/dr/ncaa/ncaa/release/sites/default/files/images/logos/schools/#{letter}/#{abbrev}.17.png'>"
   end
   
   def user_for_pick(team, bracket_id)
