@@ -7,6 +7,7 @@ gem "thin"
 gem "json"
 
 group :production, :staging do
+  gem 'newrelic_rpm'
   gem "pg"
 end
 
