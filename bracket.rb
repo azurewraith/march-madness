@@ -1,25 +1,24 @@
-require 'rubygems'
 require "bundler/setup"
+require "sinatra/sequel"
+require "sinatra"
+require "json"
 
-require 'sqlite3'
-require 'sinatra/sequel'
-require 'sinatra'
-set :database, 'sqlite://march-madness-2012.db'
+set :database, ENV['DATABASE_URL'] || 'sqlite://march-madness-2013.db'
 
 require 'date'
-require 'helpers/bracket_helper.rb'
-require 'helpers/render_helper.rb'
-require 'models/models.rb'
-require 'models/migrations.rb'
+require './helpers/bracket_helper.rb'
+require './helpers/render_helper.rb'
+require './models/models.rb'
+
+begin
+  User.first
+rescue Sequel::DatabaseError
+  require './models/migrations.rb'
+end
   
 get '/' do
-  BracketData.update_bracket_data
-  @blurb = BracketData.get_social_blurb
-  if @blurb == nil
-    @blurb = ""
-  end
-
-  @users = User.order("points desc").all
+  #@users = User.order("points desc").all
+  @users = User.all
 
   @regions = Region.all
   @e_round_1 = Game.where(:id => 201..208)
@@ -46,6 +45,16 @@ get '/' do
 
   @final = Game.where(:id => 701)
   erb :bracket
+end
+
+get '/update' do
+  BracketData.update_bracket_data
+  @blurb = BracketData.get_social_blurb
+  if @blurb == nil
+    @blurb = ""
+  end
+  content_type :json
+  { :result => 'success'}.to_json
 end
 
 get '/gmtoffset' do

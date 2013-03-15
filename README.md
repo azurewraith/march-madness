@@ -1,6 +1,6 @@
 # MarchMadness
 
-A Sinatra based data-driven live bracket viewer.
+A Sinatra based data-driven live bracket viewer, updated for 2013.
 
 ## Installation
 

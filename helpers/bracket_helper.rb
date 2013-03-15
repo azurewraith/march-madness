@@ -188,8 +188,10 @@ class BracketData
 
     def BracketData.get_json_data(key)
       Net::HTTP.start("data.ncaa.com") { |http|
-        resp = http.get("http://data.ncaa.com/sites/default/files/data/gametool/brackets/championships/basketball-men/d1/2011/#{key}.json")
-        resp.body
+        # 2013 link
+        resp = http.get("http://data.ncaa.com/jsonp/gametool/brackets/championships/basketball-men/d1/2012/#{key}.json")
+        json = resp.body.gsub(/^callbackWrapper\(/, '')
+        json = json.gsub!(/\);$/, '')
       }
     end
 end

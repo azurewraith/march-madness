@@ -1,3 +1,16 @@
+module Sequel
+  class Model
+    def method_missing(name, *args, &blk)
+      column_name = name.to_s.gsub('=', '').to_sym
+      if columns.include? column_name
+        self[column_name] = args.slice(0)
+      else
+        super
+      end
+    end
+  end
+end
+
 class Game < Sequel::Model
   many_to_one :region
   many_to_one :state

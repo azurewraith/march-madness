@@ -52,7 +52,7 @@ module RenderHelpers
     # Returns the template engine (i.e haml) to use for a given template_path
     # resolve_template_engine('users/new') => :haml
     def resolve_template_engine(template_path)
-      resolved_template_path = File.join(self.options.views, template_path.to_s + ".*")
+      resolved_template_path = File.join(self.settings.views, template_path.to_s + ".*")
       template_file = Dir[resolved_template_path].first
       raise "Template path '#{template_path}' could not be located in views!" unless template_file
       template_engine = File.extname(template_file)[1..-1].to_sym

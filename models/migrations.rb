@@ -63,10 +63,10 @@ migration "create the regions table" do
   end
   
   database[:regions].insert(:name => 'First Four', :abbrev => "")
-  database[:regions].insert(:name => 'East', :abbrev => "E")
-  database[:regions].insert(:name => 'West', :abbrev => "W")
-  database[:regions].insert(:name => 'Southwest', :abbrev => "SW")
-  database[:regions].insert(:name => 'Southeast', :abbrev => "SE")
+  database[:regions].insert(:name => '???', :abbrev => "E")
+  database[:regions].insert(:name => '???', :abbrev => "W")
+  database[:regions].insert(:name => '???', :abbrev => "SW")
+  database[:regions].insert(:name => '???', :abbrev => "SE")
   database[:regions].insert(:name => 'Final Four', :abbrev => "")
   database[:regions].insert(:name => 'Championship', :abbrev => "")
 end
@@ -105,6 +105,8 @@ end
 migration "populate initial data" do
   BracketData.get_initial_bracket_data
 end
+
+User.dataset = User.dataset
 
 migration "add users" do
   User.create(:name => 'Ashley', :color => '#BDFFFF', :points => 0)
