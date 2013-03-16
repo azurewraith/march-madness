@@ -26,7 +26,7 @@ class BracketData
     
     games.each do |game|
       g = Game.create do |g|
-        g.id = game.watchLiveUrl.split("=")[1].to_i
+        g.id = game.watchLiveUrl.split("/").last.to_i
         g.swap = (game.home.isTop == "T" or game.away.isTop == "F") ? "0" : "1"
         
         unless (game.startTimeShort == "")
@@ -88,7 +88,7 @@ class BracketData
     games = bracket_hash['games']
 
     games.each do |game|
-      id = game.watchLiveUrl.split("=")[1].to_i
+      id = game.watchLiveUrl.split("/").last.to_i
       g = Game[id]
       g.swap = (game.home.isTop == "T" or game.away.isTop == "F") ? "0" : "1"
       
