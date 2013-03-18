@@ -5,6 +5,7 @@ gem "sinatra-sequel"
 gem "crack"
 gem "thin"
 gem "json"
+gem "haml"
 
 group :production, :staging do
   gem 'newrelic_rpm'
