@@ -96,7 +96,7 @@ helpers do
     if Pick.count == 0
       User.new(:name => "Nobody", :color => "#ECECEC", :points => 0)
     else
-      Pick.where(:team_id => team.id, :bracket_id => bracket_id).first
+      Pick.where(:team_id => team.id, :bracket_id => bracket_id).first.user
     end
   end
 end
