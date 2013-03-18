@@ -5,6 +5,7 @@ GEM
     crack (0.3.1)
     daemons (1.1.8)
     eventmachine (0.12.10)
+    haml (3.1.7)
     json (1.7.7)
     method_source (0.8.1)
     newrelic_rpm (3.5.8.72)
@@ -37,6 +38,7 @@ PLATFORMS
 
 DEPENDENCIES
   crack
+  haml
   json
   newrelic_rpm
   pg
