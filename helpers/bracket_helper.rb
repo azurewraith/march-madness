@@ -5,8 +5,8 @@ class BracketData
   def init_time_zone
     Time.zone = 'America/Chicago'
   end
-  
-  def BracketData.get_initial_bracket_data
+
+  def BracketData.get_team_data
     json = BracketData.get_json_data('teams')
     tournament_hash = Crack::JSON.parse(json)
     teams = tournament_hash['teams']
@@ -19,6 +19,10 @@ class BracketData
       end
       t.save
     end
+  end
+  
+  def BracketData.get_initial_bracket_data
+    get_team_data()
 
     json = get_json_data('data')
     bracket_hash = Crack::JSON.parse(json)
@@ -81,6 +85,10 @@ class BracketData
     User.all.each do |u|
       u.points = 0
       u.save
+    end
+
+    if Team.count == 0
+      get_team_data()
     end
     
     json = get_json_data('data')

@@ -15,10 +15,10 @@ begin
 rescue Sequel::DatabaseError
   require './models/migrations.rb'
 end
-  
+
 get '/' do
   #@users = User.order("points desc").all
-  @users = User.all
+  @users = User.all.sort! { |a,b| b.points <=> a.points }
 
   @regions = Region.all
   @e_round_1 = Game.where(:id => 201..208)
