@@ -6,6 +6,7 @@ gem "crack"
 gem "thin"
 gem "json"
 gem "haml"
+gem "sequel", "~> 3.44"
 
 group :production, :staging do
   gem 'newrelic_rpm'
