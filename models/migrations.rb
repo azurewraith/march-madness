@@ -38,7 +38,7 @@ migration "create the periods table" do
     primary_key   :id
     text          :name
   end
-  
+
   database[:periods].insert(:name => '1st')
   database[:periods].insert(:name => '2nd')
   database[:periods].insert(:name => '1OT')
@@ -61,12 +61,18 @@ migration "create the regions table" do
     text        :name
     text        :abbrev
   end
-  
+
   database[:regions].insert(:name => 'First Four', :abbrev => "")
-  database[:regions].insert(:name => '???', :abbrev => "E")
-  database[:regions].insert(:name => '???', :abbrev => "W")
-  database[:regions].insert(:name => '???', :abbrev => "SW")
-  database[:regions].insert(:name => '???', :abbrev => "SE")
+
+  # nw quad
+  database[:regions].insert(:name => 'South', :abbrev => "S")
+  # sw quad
+  database[:regions].insert(:name => 'East', :abbrev => "E")
+  # ne quad
+  database[:regions].insert(:name => 'West', :abbrev => "W")
+  # se quad
+  database[:regions].insert(:name => 'Midwest', :abbrev => "MW")
+
   database[:regions].insert(:name => 'Final Four', :abbrev => "")
   database[:regions].insert(:name => 'Championship', :abbrev => "")
 end
@@ -76,12 +82,13 @@ migration "create the states table" do
     primary_key :id
     text        :name
   end
-  
+
   database[:states].insert(:name => 'pre')
   database[:states].insert(:name => 'scheduled')
   database[:states].insert(:name => 'in_between')
   database[:states].insert(:name => 'in_progress')
-  database[:states].insert(:name => 'complete')
+  database[:states].insert(:name => 'final')
+  database[:states].insert(:name => 'live')
 end
 
 migration "create the brackets table" do
@@ -89,7 +96,7 @@ migration "create the brackets table" do
     primary_key :id
     text        :users
   end
-  
+
   database[:brackets].insert(:users => "[1, 2, 3, 4, 5, 6]")
 end
 
@@ -107,6 +114,7 @@ migration "populate initial data" do
 end
 
 User.dataset = User.dataset
+Pick.dataset = Pick.dataset
 
 migration "add users" do
   User.create(:name => 'Ashley', :color => '#BDFFFF', :points => 0)
@@ -121,9 +129,4 @@ migration "set picks to the first user temporarily" do
   Team.all do |t|
     Pick.create(:bracket_id => 1, :user_id => 1, :team_id => t.id)
   end
-end
-
-migration "set 2012 game states" do
-  database[:states].insert(:name => 'live')
-  database[:states].insert(:name => 'final')
 end

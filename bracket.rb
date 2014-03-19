@@ -3,7 +3,7 @@ require "sinatra/sequel"
 require "sinatra"
 require "json"
 
-set :database, ENV['DATABASE_URL'] || 'sqlite://march-madness-2013.db'
+set :database, ENV['DATABASE_URL'] || 'sqlite://march-madness-2014.db'
 
 require 'date'
 require './helpers/bracket_helper.rb'
@@ -20,26 +20,28 @@ get '/' do
   #@users = User.order("points desc").all
   @users = User.all.sort! { |a,b| b.points <=> a.points }
 
+  # sort regions by ordering
   @regions = Region.all
-  @e_round_1 = Game.where(:id => 201..208)
-  @w_round_1 = Game.where(:id => 209..216)
-  @sw_round_1 = Game.where(:id => 217..224)
-  @se_round_1 = Game.where(:id => 225..232)
 
-  @e_round_2 = Game.where(:id => 301..304)
-  @w_round_2 = Game.where(:id => 305..308)
-  @sw_round_2 = Game.where(:id => 309..312)
-  @se_round_2 = Game.where(:id => 313..316)
+  @nw_quad_round_1 = Game.where(:id => 201..208)
+  @sw_quad_round_1 = Game.where(:id => 209..216)
+  @ne_quad_round_1 = Game.where(:id => 217..224)
+  @se_quad_round_1 = Game.where(:id => 225..232)
 
-  @e_round_3 = Game.where(:id => 401..402)
-  @w_round_3 = Game.where(:id => 403..404)
-  @sw_round_3 = Game.where(:id => 405..406)
-  @se_round_3 = Game.where(:id => 407..408)
+  @nw_quad_round_2 = Game.where(:id => 301..304)
+  @sw_quad_round_2 = Game.where(:id => 305..308)
+  @ne_quad_round_2 = Game.where(:id => 309..312)
+  @se_quad_round_2 = Game.where(:id => 313..316)
 
-  @e_round_4 = Game.where(:id => 501)
-  @w_round_4 = Game.where(:id => 502)
-  @sw_round_4 = Game.where(:id => 503)
-  @se_round_4 = Game.where(:id => 504)
+  @nw_quad_round_3 = Game.where(:id => 401..402)
+  @sw_quad_round_3 = Game.where(:id => 403..404)
+  @ne_quad_round_3 = Game.where(:id => 405..406)
+  @se_quad_round_3 = Game.where(:id => 407..408)
+
+  @nw_quad_round_4 = Game.where(:id => 501)
+  @sw_quad_round_4 = Game.where(:id => 502)
+  @ne_quad_round_4 = Game.where(:id => 503)
+  @se_quad_round_4 = Game.where(:id => 504)
 
   @final_four = Game.where(:id => 601..602)
 
@@ -74,7 +76,7 @@ post '/picks/edit' do
     return "invalid secret"
   end
   params.delete('secret')
-  
+
   params.each do |k, v|
     p = Pick[k.to_i]
     p.user_id = v.to_i
@@ -85,13 +87,13 @@ end
 
 helpers do
   include RenderHelpers
-  
+
   def icon_for_team(team_abbrev)
     abbrev = team_abbrev.downcase
     letter= abbrev[0,1]
     "<img class='image' src='http://i.turner.ncaa.com/dr/ncaa/ncaa/release/sites/default/files/images/logos/schools/#{letter}/#{abbrev}.17.png'>"
   end
-  
+
   def user_for_pick(team, bracket_id)
     if Pick.count == 0
       User.new(:name => "Nobody", :color => "#ECECEC", :points => 0)

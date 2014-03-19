@@ -25,10 +25,10 @@
         if (index > 0) {
           window.location = loc.substring(0, index);
         }
-      } 
+      }
   </script>
 
-  <a href="http://github.com/azurewraith/march-madness"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a> 
+  <a href="http://github.com/azurewraith/march-madness"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
 	<table class="scoreTable">
 	<tr>
 	<% @users.each_with_index do |user, i| %>
@@ -60,7 +60,7 @@
           <th class="round_4">
             ELITE 8
           </th>
-          <th class="round5">
+          <th class="round_5">
             FINAL FOUR
           </th>
           <th class="round_6">
@@ -84,37 +84,37 @@
         </tr>
         <tr>
           <td>
-            March 19-20
+            March 20-21
           </td>
           <td class="current">
-            March 21-22
+            March 22-23
           </td>
           <td>
-            March 23-24
+            March 27-28
           </td>
           <td>
-            March 30-31
+            March 29-30
           </td>
           <td>
-            April 6
+            April 5
           </td>
           <td>
-            April 8
+            April 7
           </td>
           <td>
-            April 6         
+            April 5
           </td>
           <td>
-            March 30-31
+            March 29-30
           </td>
           <td>
-            March 23-24
+            March 27-28
           </td>
           <td class="current">
-            March 21-22
+            March 22-23
           </td>
           <td>
-            March 19-20
+            March 20-21
           </td>
         </tr>
       </table>
@@ -123,34 +123,34 @@
     <div id="bracket">
       <div id="round1" class="round">
         <h3>
-          Round One (2010 NCAA Men's Basketball Tournament)
+          Round One (2014 NCAA Men's Basketball Tournament)
         </h3><!-- start region1 -->
         <div class="region region1">
           <h4 class="region1 first_region">
             <%= @regions[1].name %>
           </h4>
-		  <%= partial(:game, :collection => @e_round_1) %>
+		  <%= partial(:game, :collection => @nw_quad_round_1) %>
         </div><!-- /.region1 -->
         <!-- start region2 -->
         <div class="region region2">
           <h4 class="region2 first_region">
             <%= @regions[2].name %>
           </h4>
-          <%= partial(:game, :collection => @w_round_1) %>
+          <%= partial(:game, :collection => @sw_quad_round_1) %>
         </div><!-- /.region2 -->
         <!-- start region3 -->
         <div class="region region3">
           <h4 class="region3 first_region">
             <%= @regions[3].name %>
           </h4>
-          <%= partial(:game, :collection => @sw_round_1) %>
+          <%= partial(:game, :collection => @ne_quad_round_1) %>
         </div><!-- /.region3 -->
         <!-- start region4 -->
         <div class="region region4">
           <h4 class="region4 first_region">
             <%= @regions[4].name %>
           </h4>
-          <%= partial(:game, :collection => @se_round_1) %>
+          <%= partial(:game, :collection => @se_quad_round_1) %>
         </div><!-- /.region4 -->
       </div><!-- /#round1 -->
       <div id="round2" class="round">
@@ -161,25 +161,25 @@
           <h4 class="region1">
             <%= @regions[1].name %>
           </h4>
-          <%= partial(:game, :collection => @e_round_2) %>
+          <%= partial(:game, :collection => @nw_quad_round_2) %>
         </div><!-- /.region1 -->
         <div class="region region2">
           <h4 class="region2">
             <%= @regions[2].name %>
           </h4>
-          <%= partial(:game, :collection => @w_round_2) %>
+          <%= partial(:game, :collection => @sw_quad_round_2) %>
         </div>
         <div class="region region3">
           <h4 class="region3">
             <%= @regions[3].name %>
           </h4>
-          <%= partial(:game, :collection => @sw_round_2) %>
+          <%= partial(:game, :collection => @ne_quad_round_2) %>
         </div><!--/.region3-->
         <div class="region region4">
           <h4 class="region4">
             <%= @regions[4].name %>
           </h4>
-          <%= partial(:game, :collection => @se_round_2) %>
+          <%= partial(:game, :collection => @se_quad_round_2) %>
         </div><!--/.region4-->
       </div>
       <div id="round3" class="round">
@@ -190,25 +190,25 @@
           <h4 class="region1">
             <%= @regions[1].name %>
           </h4>
-          <%= partial(:game, :collection => @e_round_3) %>
+          <%= partial(:game, :collection => @nw_quad_round_3) %>
         </div><!-- /.region1 -->
         <div class="region region2">
           <h4 class="region2">
             <%= @regions[2].name %>
           </h4>
-          <%= partial(:game, :collection => @w_round_3) %>
+          <%= partial(:game, :collection => @sw_quad_round_3) %>
         </div>
         <div class="region region3">
           <h4 class="region3">
             <%= @regions[3].name %>
           </h4>
-          <%= partial(:game, :collection => @sw_round_3) %>
+          <%= partial(:game, :collection => @ne_quad_round_3) %>
         </div><!-- /.region3 -->
         <div class="region region4">
           <h4 class="region4">
             <%= @regions[4].name %>
           </h4>
-          <%= partial(:game, :collection => @se_round_3) %>
+          <%= partial(:game, :collection => @se_quad_round_3) %>
         </div><!-- /.region4 -->
       </div>
       <div id="round4" class="round">
@@ -219,25 +219,25 @@
           <h4 class="region1">
             <%= @regions[1].name %>
           </h4>
-          <%= partial(:game, :collection => @e_round_4) %>
+          <%= partial(:game, :collection => @nw_quad_round_4) %>
         </div><!-- /.region1 -->
         <div class="region region2">
           <h4 class="region2">
             <%= @regions[2].name %>
           </h4>
-          <%= partial(:game, :collection => @w_round_4) %>
+          <%= partial(:game, :collection => @sw_quad_round_4) %>
         </div><!-- /.region2 -->
         <div class="region region3">
           <h4 class="region3">
             <%= @regions[3].name %>
           </h4>
-          <%= partial(:game, :collection => @sw_round_4) %>
+          <%= partial(:game, :collection => @ne_quad_round_4) %>
         </div><!--/.region3-->
         <div class="region region4">
           <h4 class="region4">
             <%= @regions[4].name %>
           </h4>
-          <%= partial(:game, :collection => @se_round_4) %>
+          <%= partial(:game, :collection => @se_quad_round_4) %>
         </div><!--/#region4-->
       </div>
       <div id="round5" class="round">
