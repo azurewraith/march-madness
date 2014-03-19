@@ -16,68 +16,10 @@ class BracketData
         t.school = team.names.full
         t.link = team.names.seo
         t.abbrev = team.names.char6
+        t.short = team.names.short
+        t.eliminated = (team.eliminated == true) ? 1 : 0
       end
       t.save
-    end
-  end
-
-  def BracketData.get_initial_bracket_data
-    get_team_data()
-
-    json = get_json_data('data')
-    bracket_hash = Crack::JSON.parse(json)
-    games = bracket_hash['games']
-
-    games.each do |game|
-      g = Game.create do |g|
-        g.id = game.watchLiveUrl.split("/").last.to_i
-        g.swap = (game.home.isTop == "T" or game.away.isTop == "F") ? "0" : "1"
-
-        unless (game.startTimeShort == "")
-          t_str = game.startTimeShort.gsub('P', ' P').gsub('.', '')
-          d_str = game.gameDate.gsub(/\s+/, ' ')
-          td_str = "#{d_str} 2014 #{t_str} -0500"
-
-          g.time = DateTime.strptime(td_str, "%A , %B %d %Y %I:%M %p %z")
-        else
-          d_str = game.gameDate.gsub(/\s+/, ' ')
-          g.time = DateTime.strptime(d_str + " 2014", "%A , %B %d %Y")
-        end
-
-        case game.currentPeriod
-        when 1..2
-          g.period_id = game.currentPeriod
-        when "1st"
-          g.period_id = 1
-        when "2nd"
-          g.period_id = 2
-        when "Final"
-          g.period_id = 2
-        when /(\d)OT/
-          g.period_id = 2 + $1.to_i
-        end
-
-        # This is now a text field
-        g.state_id = State.where(:name => game.gameState).first.id
-
-        if (game.home.names.seo != "")
-          t = Team.where(:link => game.home.names.seo).first
-          g.home_team_id = t.id
-          t.seed = (g.swap == 0) ? game.seedTop : game.seedBottom
-          t.save
-        end
-        g.home_points = game.home.score
-
-        if (game.away.names.seo != "")
-          t = Team.where(:link => game.away.names.seo).first
-          g.visitor_team_id = t.id
-          t.seed = (g.swap != 0) ? game.seedTop : game.seedBottom
-          t.save
-        end
-        g.visitor_points = game.away.score
-      end
-      g.save
-      BracketData.add_winner_if_needed(g)
     end
   end
 
@@ -98,17 +40,18 @@ class BracketData
     games.each do |game|
       id = game.watchLiveUrl.split("/").last.to_i
       g = Game[id]
+      g = Game.create(:id => id) if g.nil?
       g.swap = (game.home.isTop == "T" or game.away.isTop == "F") ? "0" : "1"
 
       unless (game.startTimeShort == "")
         t_str = game.startTimeShort.gsub('P', ' P').gsub('.', '')
         d_str = game.gameDate.gsub(/\s+/, ' ')
-        td_str = "#{d_str} 2012 #{t_str} -0500"
+        td_str = "#{d_str} 2014 #{t_str} -0500"
 
         g.time = DateTime.strptime(td_str, "%A , %B %d %Y %I:%M %p %z")
       else
         d_str = game.gameDate.gsub(/\s+/, ' ')
-        g.time = DateTime.strptime(d_str + " 2012", "%A , %B %d %Y")
+        g.time = DateTime.strptime(d_str + " 2014", "%A , %B %d %Y")
       end
 
       case game.currentPeriod
@@ -171,7 +114,7 @@ class BracketData
       if (w.nil? and g.home_points != nil and g.visitor_points != nil and g.state.name == 'final')
           winning_team_id = g.home_points > g.visitor_points ? g.home_team_id : g.visitor_team_id
           round_id = (g.id / 100) - 1
-          unless round_id == 0
+          unless round_id == 0 or Pick.count == 0
             user_id = Pick.where(:team_id => winning_team_id, :bracket_id => 1).first.user.id
             #user_id = Team[winning_team_id].user.id
             w = Winner.create do |w|

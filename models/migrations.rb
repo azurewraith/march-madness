@@ -29,7 +29,9 @@ migration "create the teams table" do
     integer     :seed
     text        :link
     text        :abbrev
+    text        :short
     integer     :user_id
+    integer     :eliminated
   end
 end
 
@@ -109,8 +111,10 @@ migration "create the users table" do
   end
 end
 
+Game.dataset = Game.dataset
+
 migration "populate initial data" do
-  BracketData.get_initial_bracket_data
+  BracketData.update_bracket_data
 end
 
 User.dataset = User.dataset
@@ -125,8 +129,13 @@ migration "add users" do
   User.create(:name => 'Joe', :color => '#D99595', :points => 0)
 end
 
-migration "set picks to the first user temporarily" do
-  Team.all do |t|
-    Pick.create(:bracket_id => 1, :user_id => 1, :team_id => t.id)
+migration "set random picks to users" do
+  seed_groups = [1..3, 4..6, 7..9, 10..12, 13..15, 16..16]
+  index = 0
+  seed_groups.each do |range|
+    Team.where(:eliminated => 0, :seed => range).order(Sequel.lit('RANDOM()')).all do |t|
+      Pick.create(:bracket_id => 1, :user_id => ((index % 6) + 1), :team_id => t.id)
+      index = index + 1
+    end
   end
 end

@@ -12,6 +12,7 @@ module Sequel
 end
 
 class Game < Sequel::Model
+  unrestrict_primary_key
   many_to_one :region
   many_to_one :state
   many_to_one :home_team, :class_name => 'Team', :foreign_key => 'home_team_id'
