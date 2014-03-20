@@ -23,27 +23,27 @@ get '/' do
   # sort regions by ordering
   @regions = Region.all
 
-  @nw_quad_round_1 = Game.where(:id => 201..208)
-  @sw_quad_round_1 = Game.where(:id => 209..216)
-  @ne_quad_round_1 = Game.where(:id => 217..224)
-  @se_quad_round_1 = Game.where(:id => 225..232)
+  @nw_quad_round_1 = Game.where(:id => 201..208).order(:id)
+  @sw_quad_round_1 = Game.where(:id => 209..216).order(:id)
+  @ne_quad_round_1 = Game.where(:id => 217..224).order(:id)
+  @se_quad_round_1 = Game.where(:id => 225..232).order(:id)
 
-  @nw_quad_round_2 = Game.where(:id => 301..304)
-  @sw_quad_round_2 = Game.where(:id => 305..308)
-  @ne_quad_round_2 = Game.where(:id => 309..312)
-  @se_quad_round_2 = Game.where(:id => 313..316)
+  @nw_quad_round_2 = Game.where(:id => 301..304).order(:id)
+  @sw_quad_round_2 = Game.where(:id => 305..308).order(:id)
+  @ne_quad_round_2 = Game.where(:id => 309..312).order(:id)
+  @se_quad_round_2 = Game.where(:id => 313..316).order(:id)
 
-  @nw_quad_round_3 = Game.where(:id => 401..402)
-  @sw_quad_round_3 = Game.where(:id => 403..404)
-  @ne_quad_round_3 = Game.where(:id => 405..406)
-  @se_quad_round_3 = Game.where(:id => 407..408)
+  @nw_quad_round_3 = Game.where(:id => 401..402).order(:id)
+  @sw_quad_round_3 = Game.where(:id => 403..404).order(:id)
+  @ne_quad_round_3 = Game.where(:id => 405..406).order(:id)
+  @se_quad_round_3 = Game.where(:id => 407..408).order(:id)
 
-  @nw_quad_round_4 = Game.where(:id => 501)
-  @sw_quad_round_4 = Game.where(:id => 502)
-  @ne_quad_round_4 = Game.where(:id => 503)
-  @se_quad_round_4 = Game.where(:id => 504)
+  @nw_quad_round_4 = Game.where(:id => 501).order(:id)
+  @sw_quad_round_4 = Game.where(:id => 502).order(:id)
+  @ne_quad_round_4 = Game.where(:id => 503).order(:id)
+  @se_quad_round_4 = Game.where(:id => 504).order(:id)
 
-  @final_four = Game.where(:id => 601..602)
+  @final_four = Game.where(:id => 601..602).order(:id)
 
   @final = Game.where(:id => 701)
   erb :bracket
