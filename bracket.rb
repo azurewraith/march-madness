@@ -3,7 +3,7 @@ require "sinatra/sequel"
 require "sinatra"
 require "json"
 
-set :database, ENV['DATABASE_URL'] || 'sqlite://march-madness-2014.db'
+set :database, ENV['DATABASE_URL'] || 'sqlite://march-madness-2017.db'
 
 require 'date'
 require './helpers/bracket_helper.rb'
@@ -91,7 +91,7 @@ helpers do
   def icon_for_team(team_abbrev)
     abbrev = team_abbrev.downcase
     letter= abbrev[0,1]
-    "<img class='image' src='http://i.turner.ncaa.com/dr/ncaa/ncaa/release/sites/default/files/images/logos/schools/#{letter}/#{abbrev}.17.png'>"
+    "<img class='image' src='http://i.turner.ncaa.com/sites/default/files/images/logos/schools/#{letter}/#{abbrev}.17.png'>"
   end
 
   def user_for_pick(team, bracket_id)

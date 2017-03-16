@@ -67,13 +67,13 @@ migration "create the regions table" do
   database[:regions].insert(:name => 'First Four', :abbrev => "")
 
   # nw quad
-  database[:regions].insert(:name => 'South', :abbrev => "S")
-  # sw quad
   database[:regions].insert(:name => 'East', :abbrev => "E")
-  # ne quad
+  # sw quad
   database[:regions].insert(:name => 'West', :abbrev => "W")
-  # se quad
+  # ne quad
   database[:regions].insert(:name => 'Midwest', :abbrev => "MW")
+  # se quad
+  database[:regions].insert(:name => 'South', :abbrev => "S")
 
   database[:regions].insert(:name => 'Final Four', :abbrev => "")
   database[:regions].insert(:name => 'Championship', :abbrev => "")

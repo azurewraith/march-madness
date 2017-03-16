@@ -7,19 +7,22 @@ class BracketData
   end
 
   def BracketData.get_team_data
-    json = BracketData.get_json_data('teams')
+    json = BracketData.get_json_data('data')
     tournament_hash = Crack::JSON.parse(json)
-    teams = tournament_hash['teams']
-
-    teams.each do |team|
-      t = Team.create do |t|
-        t.school = team.names.full
-        t.link = team.names.seo
-        t.abbrev = team.names.char6
-        t.short = team.names.short
-        t.eliminated = (team.eliminated == true) ? 1 : 0
+    tournament_hash["games"].each do |game|
+      ["away", "home"].each do |pos|
+        team = game[pos]
+        if Team.where(abbrev: team.names.char6).first.nil?
+          dt = Team.create do |t|
+            t.school = team.names.full
+            t.link = team.names.seo
+            t.abbrev = team.names.char6
+            t.short = team.names.short
+            t.eliminated = 0
+          end
+          dt.save
+        end
       end
-      t.save
     end
   end
 
@@ -141,8 +144,8 @@ class BracketData
 
     def BracketData.get_json_data(key)
       Net::HTTP.start("data.ncaa.com") { |http|
-        # 2013 link
-        resp = http.get("http://data.ncaa.com/jsonp/gametool/brackets/championships/basketball-men/d1/2013/#{key}.json")
+        # 2017 link
+        resp = http.get("http://data.ncaa.com/jsonp/gametool/brackets/championships/basketball-men/d1/2017/#{key}.json")
         json = resp.body.gsub(/^callbackWrapper\(/, '')
         json = json.gsub!(/\);$/, '')
       }
