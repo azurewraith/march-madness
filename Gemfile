@@ -9,6 +9,7 @@ gem "thin"
 gem "json"
 gem "haml"
 gem "sequel", "~> 3.44"
+gem "bacon"
 
 group :production, :staging do
   gem 'newrelic_rpm'
