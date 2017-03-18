@@ -3,7 +3,8 @@ require 'crack'
 
 class BracketData
   def init_time_zone
-    Time.zone = 'America/Chicago'
+    #Time.zone = 'America/Chicago'
+    Time.zone = 'America/Indiana/Indianapolis'
   end
 
   def BracketData.get_team_data
@@ -46,15 +47,17 @@ class BracketData
       g = Game.create(:id => id) if g.nil?
       g.swap = (game.home.isTop == "T" or game.away.isTop == "F") ? "0" : "1"
 
+      tz_offset = "-0400"
+
       unless (game.startTimeShort == "")
         t_str = game.startTimeShort.gsub('P', ' P').gsub('.', '')
         d_str = game.gameDate.gsub(/\s+/, ' ')
-        td_str = "#{d_str} 2014 #{t_str} -0500"
+        td_str = "#{d_str} #{Date.today.year} #{t_str} #{tz_offset}"
 
         g.time = DateTime.strptime(td_str, "%A , %B %d %Y %I:%M %p %z")
       else
         d_str = game.gameDate.gsub(/\s+/, ' ')
-        g.time = DateTime.strptime(d_str + " 2014", "%A , %B %d %Y")
+        g.time = DateTime.strptime(d_str + " #{Date.today.year}", "%A , %B %d %Y")
       end
 
       case game.currentPeriod
