@@ -47,18 +47,7 @@ class BracketData
       g = Game.create(:id => id) if g.nil?
       g.swap = (game.home.isTop == "T" or game.away.isTop == "F") ? "0" : "1"
 
-      tz_offset = "-0400"
-
-      unless (game.startTimeShort == "")
-        t_str = game.startTimeShort.gsub('P', ' P').gsub('.', '')
-        d_str = game.gameDate.gsub(/\s+/, ' ')
-        td_str = "#{d_str} #{Date.today.year} #{t_str} #{tz_offset}"
-
-        g.time = DateTime.strptime(td_str, "%A , %B %d %Y %I:%M %p %z")
-      else
-        d_str = game.gameDate.gsub(/\s+/, ' ')
-        g.time = DateTime.strptime(d_str + " #{Date.today.year}", "%A , %B %d %Y")
-      end
+      g.time = DateTime.strptime(game.startTimeEpoch,'%s')
 
       case game.currentPeriod
       when 1..2
