@@ -46,6 +46,8 @@ get '/' do
   @final_four = Game.where(:id => 601..602).order(:id)
 
   @final = Game.where(:id => 701)
+
+  @tz_offset = "-04:00"
   erb :bracket
 end
 
