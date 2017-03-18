@@ -4,7 +4,7 @@ require 'crack'
 class BracketData
   def init_time_zone
     #Time.zone = 'America/Chicago'
-    Time.zone = 'America/Indiana/Indianapolis'
+    #Time.zone = 'America/Indiana/Indianapolis'
   end
 
   def BracketData.get_team_data

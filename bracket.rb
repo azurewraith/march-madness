@@ -61,11 +61,11 @@ get '/update' do
   { :result => 'success'}.to_json
 end
 
-get '/gmtoffset' do
-  session[:gmtoffset] = -params[:gmtoffset].to_i*60 if !params[:gmtoffset].nil? # notice that the javascript version of gmtoffset is in minutes ;-)
-  session[:time_zone_name] = ActiveSupport::TimeZone.all.select{|t|t.utc_offset == params[:gmtoffset]}.first
-  render :nothing => true # this can be improved by being able to return xml or json output to inform the client side whether the offset was successfully set on the server or not.
-end
+# get '/gmtoffset' do
+#   session[:gmtoffset] = -params[:gmtoffset].to_i*60 if !params[:gmtoffset].nil? # notice that the javascript version of gmtoffset is in minutes ;-)
+#   session[:time_zone_name] = ActiveSupport::TimeZone.all.select{|t|t.utc_offset == params[:gmtoffset]}.first
+#   render :nothing => true # this can be improved by being able to return xml or json output to inform the client side whether the offset was successfully set on the server or not.
+# end
 
 get '/picks/edit' do
   @users = User.all
