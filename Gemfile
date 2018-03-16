@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-ruby '2.2.9'
+ruby '2.2.6'
 
 gem "sinatra"
 gem "sinatra-sequel"
