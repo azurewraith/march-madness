@@ -3,7 +3,7 @@ require "sinatra/sequel"
 require "sinatra"
 require "json"
 
-set :database, ENV['DATABASE_URL'] || 'sqlite://march-madness-2017.db'
+set :database, ENV['DATABASE_URL'] || 'sqlite://march-madness-2018.db'
 
 require 'date'
 require './helpers/bracket_helper.rb'
